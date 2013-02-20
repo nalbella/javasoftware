@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition 
+	template="/plantillas/administracion.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"> 
+         <ui:define name="header">
+         	<ui:include src="/extractos/encabezadoNavegacionGeneral.xhtml">
+         	</ui:include>
+         </ui:define>
+         <ui:define name="body">
+		<div align="center">
+			<h:form >
+				Proposito Encuesta	
+				<h:inputTextarea 
+					id="propositoE" 
+					cols="20"  
+					rows="3" 
+					value="#{encuestaSesion.proposito}"
+					required="true"
+					requiredMessage="Tiene que insertar el proposito de la encuesta">
+				</h:inputTextarea><h:message for="propositoE" styleClass="error"/><br/>			 
+				<h:commandButton action="#{encuestaSesion.iniciarEncuesta}" value="editar"/>
+			</h:form>
+		</div>	
+         </ui:define>
+   </ui:composition>

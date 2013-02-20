@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+ <display-name>GestorClientesJSF</display-name>
+ <!--
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+-->
+  <login-config>
+    <auth-method>FORM</auth-method>
+    <realm-name>JDBCRealm</realm-name>
+    <form-login-config>
+      <form-login-page>/login/login.jsp</form-login-page>
+      <form-error-page>/login/error_login.jsp</form-error-page>
+    </form-login-config>
+  </login-config>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>GestionEncuestas</web-resource-name>
+      <url-pattern>/encuestas/administracion/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      
+      <role-name>administrador</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+    	<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  <security-constraint>
+    <web-resource-collection>
+      <web-resource-name>EncuestasUsuarios</web-resource-name>
+      <url-pattern>/encuestas/usuarios/*</url-pattern>
+      <http-method>GET</http-method>
+      <http-method>POST</http-method>
+    </web-resource-collection>
+    <auth-constraint>
+      
+      <role-name>administrador</role-name>
+      <role-name>registered-user</role-name>
+    </auth-constraint>
+    <user-data-constraint>
+    	<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+  </security-constraint>
+  <security-role>
+    <role-name>registered-user</role-name>
+  </security-role>
+  <security-role>
+    <role-name>administrador</role-name>
+  </security-role> 
+ <servlet>
+  <servlet-name>Faces Servlet</servlet-name>
+  <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+  <load-on-startup>1</load-on-startup>
+ </servlet>
+ <servlet-mapping>
+  <servlet-name>Faces Servlet</servlet-name>
+  <url-pattern>*.jsf</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>Faces Servlet</servlet-name>
+  <url-pattern>*.faces</url-pattern>
+ </servlet-mapping>
+ <servlet-mapping>
+  <servlet-name>Faces Servlet</servlet-name>
+  <url-pattern>/faces/*</url-pattern>
+ </servlet-mapping>
+</web-app>

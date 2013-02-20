@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+	<f:view>
+	<h:body>
+	<div align="center">
+		<fieldset>
+			<legend>Banco de Preguntas</legend>
+			<h:form>
+				<h:selectOneMenu valueChangeListener="#{encuestaSesion.selectPregunta}" >
+					<f:selectItems value="#{bancoPreguntas.arrayItemPregunta}" />
+				</h:selectOneMenu>
+				<h:commandButton value="añadir a Encuesta"  actionListener="#{encuestaSesion.addPregunta}" />
+			</h:form>
+		</fieldset>
+		<fieldset>
+			<legend>Nueva Pregunta</legend>
+			<h:form>
+				Texto: <h:inputText  id="nueva" value="#{bancoPreguntas.nuevaPregunta}" />
+				
+				<h:selectOneRadio value="#{bancoPreguntas.tipo}">
+					<f:selectItem itemValue="0" itemLabel="si/no"/>
+					<f:selectItem itemValue="1" itemLabel="si/no/nsnc"/>
+					<f:selectItem itemValue="2" itemLabel="expresiva"/>
+				</h:selectOneRadio><br></br>
+				<h:commandButton value="añadir"  id="boton" actionListener="#{bancoPreguntas.addPregunta}" />
+			</h:form>
+		</fieldset>
+		<div style="#{encuestaSesion.visibilidadDetalle}">
+			<fieldset>
+				<legend>Preguntas agregadas a la encuesta</legend>
+			
+			
+				<h:dataTable id="tablaPreguntasEncuesta" value="#{encuestaSesion.registrosEncuesta}" 
+				var="regEncuesta"
+				border="2">
+					<h:column>
+					<f:facet name="header">Referencia</f:facet>
+					#{regEncuesta.ref}
+					</h:column>
+					<h:column>
+					<f:facet name="header">Texto</f:facet>
+					#{regEncuesta.texto}
+					</h:column>
+					<h:column>
+					<f:facet name="header">Tipo</f:facet>
+					#{regEncuesta.tipo}
+					</h:column>
+					<h:column>
+						<f:facet name="header">Eliminar</f:facet>
+						<h:form id="registroPreguntaEncuesta">
+							<h:commandLink actionListener="#{encuestaSesion.eliminarPregunta}" value="Eliminar">
+								<f:param id="preguntaRef" value="#{regEncuesta}"></f:param>
+								
+							</h:commandLink>
+						</h:form>
+					</h:column>
+				</h:dataTable>
+			</fieldset>
+			<h:form>
+			<h:commandButton action="#{encuestaSesion.terminarEncuesta}" value="terminar" />
+			</h:form>
+			
+		</div>
+		
+	</div>
+	</h:body>
+	</f:view>
+</html>

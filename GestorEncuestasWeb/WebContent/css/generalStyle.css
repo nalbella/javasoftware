@@ -1,0 +1,8 @@
+@CHARSET "ISO-8859-1";
+.normalSize { font-size: 110% }
+.largeSize { font-size: 200% }
+.error{ clolor:red;}
+.encabezadoNavegacion{background-color: #fa23f1;
+	font-family: sans-serif;
+	font-style: italic;}
+	
